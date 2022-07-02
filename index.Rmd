@@ -1,0 +1,72 @@
+---
+title: Tablero de revisión EGTPI
+---
+
+```{css, echo=FALSE}
+body {
+  font-size: 12px;
+}
+.main-container {
+  max-width: 96%;
+}
+h1 {
+  font-size: 25px;
+}
+h1.title {
+  display: none;
+}
+```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+source("data.R", encoding = "utf-8")
+
+excel_icon <- "excel.png"
+
+div(
+  style = "margin-top: 10px; margin-bottom: 5px",
+  h1(paste0(
+    "Tablero de revisión EGTPI (Actualizado al ",
+    substr(Sys.time(),1,16),")"),
+    style = "display: inline"),
+  tags$a(
+    href = "revision-egtpi.xlsx", style = "float: right",
+    tags$img(src = excel_icon,
+             width = "30px", height = "30px"))
+)
+
+div(
+  bscols(widths = c(NA),
+    div(filter_depa),
+    div(filter_prov),
+    div(filter_dist),
+    div(filter_mes),
+    div(filter_rev),
+    div(filter_sm2022))
+)
+
+div(nba_table)
+
+# div(bscols(
+#   widths = c(4, NA, NA),
+#     list(team_filter,
+#          conference_filter,
+#          minutes_filter))
+# )
+
+## crosstalk team filter
+# filter_prov <- filter_select(
+#   id = "prov",
+#   label = "PROVINCIA",
+#   sharedData = crosstalk_data,
+#   group = ~ PROVINCIA,
+#   multiple = FALSE
+# )
+### display crosstalk filters
+# div(bscols(
+#   widths = c(4, NA, NA),
+#   list(filter_depa, filter_prov))
+# )
+
+### load font from google fonts ----
+# htmltools::tags$link(href = "https://fonts.googleapis.com/css?family=Chivo:400,600,700&display=swap", rel = "stylesheet")
+```
